@@ -8,4 +8,4 @@
   </p>
 </template>
 
-<style scoped></style>
+<style src="./styles/main.scss" lang="scss"></style>
