@@ -1,2 +1,2 @@
 export * from './types.ts'
-export {AppLayout, DefaultLayout} from './ui'
+export {AppLayout, DefaultLayout, OnlyContentLayout} from './ui'
