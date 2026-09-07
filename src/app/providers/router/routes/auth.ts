@@ -1,4 +1,4 @@
-import {AppLayoutsEnum} from "@/shared/layouts";
+import {AppLayoutsEnum} from "../../../layouts";
 import {RouteNamesEnum} from "@/shared/config";
 
 export const route = {

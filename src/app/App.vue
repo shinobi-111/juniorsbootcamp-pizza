@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {AppLayout} from "@/shared/layouts";
+
+import {AppLayout} from "@/app/layouts";
 </script>
 
 <template>

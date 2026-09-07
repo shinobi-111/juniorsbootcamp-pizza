@@ -12,3 +12,6 @@ router.beforeEach(async (to) => {
 
   await loadLayoutMiddleware(to)
 })
+router.afterEach(() => {
+  document.querySelector('#app')?.classList.remove('route-loading')
+})

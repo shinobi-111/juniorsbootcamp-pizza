@@ -1,4 +1,4 @@
-import {AppLayoutsEnum} from "@/shared/layouts";
+import {AppLayoutsEnum} from "../../layouts";
 import type { Component } from 'vue'
 
 declare module 'vue-router' {
