@@ -1,9 +1,12 @@
 <script setup lang="ts">
 
+import {Typography} from "@/shared/ui/typography";
 </script>
 
 <template>
-  <div>Home page</div>
+  <Typography variant="body-md">
+    Home page
+  </Typography>
 </template>
 
 <style scoped lang="scss">
