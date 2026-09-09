@@ -1,12 +1,12 @@
 <script setup lang="ts">
 
-import {Typography} from "@/shared/ui/typography";
+import {VTypography} from "../../../shared/ui/v-typography";
 </script>
 
 <template>
-  <Typography variant="body-md">
+  <VTypography variant="body-md">
     Home page
-  </Typography>
+  </VTypography>
 </template>
 
 <style scoped lang="scss">

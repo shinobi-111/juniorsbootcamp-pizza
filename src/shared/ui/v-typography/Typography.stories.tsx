@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from "@storybook/vue3-vite";
-import {Typography} from "@/shared/ui";
+import {VTypography} from "@/shared/ui";
 import type {Variant} from "./types.ts";
 
 const variants: Variant[] = [
@@ -8,7 +8,7 @@ const variants: Variant[] = [
 
 const meta = {
   title: 'Typography',
-  component: Typography,
+  component: VTypography,
   tags: ['autodocs'],
   argTypes: {
     tag: { control: 'select', options: ['div', 'span'] },
@@ -23,13 +23,13 @@ const meta = {
   },
   render: (args) => {
     return {
-      components: { Typography },
+      components: { Typography: VTypography },
       setup() {
-        return () => <Typography {...args}>Текст 1 2 3 4 5</Typography>
+        return () => <VTypography {...args}>Текст 1 2 3 4 5</VTypography>
       },
     }
   },
-} satisfies Meta<typeof Typography>;
+} satisfies Meta<typeof VTypography>;
 
 export default meta;
 
@@ -43,13 +43,13 @@ export const AllVariants: Story = {
   args: {},
   render: (args) => {
     return {
-      components: { Typography },
+      components: { Typography: VTypography },
       setup() {
         return () => (
           <div style={{display: 'flex', flexDirection: 'column', gap: '2px'}}>
             {
               variants.map(variant => {
-                return <Typography {...args} variant={variant}>Текст 1 2 3 4 5</Typography>
+                return <VTypography {...args} variant={variant}>Текст 1 2 3 4 5</VTypography>
               })
             }
           </div>

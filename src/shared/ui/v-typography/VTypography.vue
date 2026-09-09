@@ -16,4 +16,4 @@ const {tag = 'span', variant} = defineProps<{
   </component>
 </template>
 
-<style  src="./Typography.scss"></style>
+<style  src="./VTypography.scss"></style>
