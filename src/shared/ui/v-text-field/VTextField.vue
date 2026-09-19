@@ -1,6 +1,6 @@
 <script setup lang="ts">
   const {type = 'text', placeholder = ''} = defineProps<{
-    type?: 'text' | 'password'
+    type?: 'text' | 'password' | 'number'
     placeholder?: string
   }>()
   const model = defineModel<string>()

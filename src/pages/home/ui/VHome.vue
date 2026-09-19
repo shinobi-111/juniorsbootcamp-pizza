@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {VTypography} from "../../../shared/ui/v-typography";
+import {VTypography} from "@/shared/ui";
 </script>
 
 <template>
