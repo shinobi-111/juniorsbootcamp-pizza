@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import {ChevronLeftIcon} from "@/shared/lib/icons";
 import {VButton, VTextField, VTypography} from "@/shared/ui";
+import { maskito as vMaskito } from '@maskito/vue'
 import {authApi} from "@/pages/auth/api";
 import {ref} from "vue";
 import {useMutation} from "@pinia/colada";
 import {onlyDigitsMaskOptions} from "@/shared/lib/mask";
+import {useRouter} from "vue-router";
+import {RouteNamesEnum} from "@/shared/config";
 
 const emit = defineEmits<{
   'next-step': []
@@ -13,12 +16,13 @@ const {phone} = defineProps<{
   phone: string
 }>()
 
+const router = useRouter()
 const otpCode = ref<string>('')
 
 const { mutate: signIn } = useMutation({
   mutation: authApi.signIn,
   onSuccess() {
-   console.log('success')
+    router.replace({name: RouteNamesEnum.Home})
   },
 })
 
