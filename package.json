@@ -22,6 +22,8 @@
     "@maskito/kit": "^5.4.0",
     "@maskito/vue": "^5.4.0",
     "@pinia/colada": "^1.4.5",
+    "@regle/core": "^1.29.3",
+    "@regle/rules": "^1.29.3",
     "pinia": "^4.0.3",
     "vue": "^3.5.42",
     "vue-router": "^5.3.1"
