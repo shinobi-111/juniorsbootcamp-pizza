@@ -14,6 +14,10 @@ const meta = {
       control: 'text',
     },
 
+    message: {
+      control: 'text',
+    },
+
     type: {
       control: { type: 'select' },
       defaultValue: 'text',
@@ -22,7 +26,8 @@ const meta = {
   },
   args: {
     type: 'text',
-    placeholder: 'placeholder'
+    placeholder: 'placeholder',
+    message: '',
   },
 
 } satisfies Meta<typeof VTextField>;
