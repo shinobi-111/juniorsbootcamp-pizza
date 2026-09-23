@@ -3,11 +3,15 @@ import {ChevronLeftIcon} from "@/shared/lib/icons";
 import {VButton, VTextField, VTypography} from "@/shared/ui";
 import { maskito as vMaskito } from '@maskito/vue'
 import {authApi} from "@/pages/auth/api";
-import {ref} from "vue";
+import {computed, onMounted, onUnmounted, ref} from "vue";
 import {useMutation} from "@pinia/colada";
 import {onlyDigitsMaskOptions} from "@/shared/lib/mask";
 import {useRouter} from "vue-router";
 import {RouteNamesEnum} from "@/shared/config";
+import type {ButtonProperty} from "@/pages/auth/ui/components/v-otp/types.ts";
+
+
+
 
 const emit = defineEmits<{
   'next-step': []
@@ -18,6 +22,9 @@ const {phone} = defineProps<{
 
 const router = useRouter()
 const otpCode = ref<string>('')
+const seconds = ref(10)
+
+let timerId: ReturnType<typeof setInterval> | null = null;
 
 const { mutate: signIn } = useMutation({
   mutation: authApi.signIn,
@@ -28,8 +35,48 @@ const { mutate: signIn } = useMutation({
 
 const { mutate: requestOtp } = useMutation({
   mutation: authApi.getOtpCode,
+  onSuccess() {
+    startTimer()
+  }
 })
 
+const resendButtonProperty  = computed<ButtonProperty>(() => {
+  return seconds.value === 0 ? {
+    variant: 'secondary',
+    text:  'Отправить код повторно'
+  } : {
+    variant: 'ghost',
+    text:  `Отправить код повторно через ${seconds.value} секунд`
+  }
+})
+
+function startTimer () {
+  stopTimer()
+  seconds.value = 10;
+  timerId = setInterval(() => {
+    seconds.value--
+    if (seconds.value <= 0) {
+      stopTimer()
+    }
+  }, 1000)
+}
+
+function stopTimer () {
+  if (timerId) {
+    clearInterval(timerId)
+    timerId = null
+  }
+}
+
+function resendOtp() {
+  if (seconds.value !== 0) {
+    return
+  }
+  requestOtp(phone)
+}
+
+onMounted(startTimer)
+onUnmounted(stopTimer)
 </script>
 
 <template>
@@ -66,10 +113,10 @@ const { mutate: requestOtp } = useMutation({
       Войти
     </VButton>
     <VButton
-      variant="secondary"
-      @click="requestOtp(phone)"
+      :variant="resendButtonProperty.variant"
+      @click="resendOtp"
     >
-      Отправить код повторно
+      {{ resendButtonProperty.text }}
     </VButton>
     <VTypography
       variant="caption"

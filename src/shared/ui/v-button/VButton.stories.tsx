@@ -9,7 +9,7 @@ const meta = {
     variant: {
       control: { type: 'select' },
       defaultValue: 'primary',
-      options: ['primary', 'secondary'],
+      options: ['primary', 'secondary', 'ghost'],
     },
 
   },

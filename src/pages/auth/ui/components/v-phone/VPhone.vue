@@ -39,6 +39,7 @@ const { r$ } = useRegle(
     autoDirty: false,
   },
 )
+
 async function sendOtpCode() {
   const { valid } = await r$.$validate()
 

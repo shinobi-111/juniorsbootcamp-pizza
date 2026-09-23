@@ -14,14 +14,20 @@
   font-weight: 500;
   border-radius: 30px;
   padding: 15px 0;
+
   &--primary {
     background-color: var(--accent-quaternary);
     color: var(--primary-foreground);
 
   }
+
   &--secondary {
     background-color: var(--surface-foreground);
     color: var(--primary);
+  }
 
+  &--ghost {
+    background-color: transparent;
+    color: var(--primary);
   }
 }
