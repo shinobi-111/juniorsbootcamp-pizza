@@ -4,12 +4,14 @@ import { maskito as vMaskito } from '@maskito/vue'
 import {phoneMaskOptions} from "@/shared/lib/mask";
 import {useMutation} from "@pinia/colada";
 import {authApi} from "@/pages/auth/api";
+import {useRegle} from "@regle/core";
+import {withMessage} from "@regle/rules";
 
 const phone = defineModel<string>({default: ''})
 const emit = defineEmits<{
   'next-step': []
-  'resend-code': []
 }>()
+
 const { mutate: requestOtp } = useMutation({
   mutation: authApi.getOtpCode,
   onSuccess() {
@@ -17,6 +19,35 @@ const { mutate: requestOtp } = useMutation({
   },
 })
 
+const { r$ } = useRegle(
+  { phone },
+  {
+    phone: {
+      phoneLength: withMessage(
+        (value) => {
+          if (typeof value !== 'string') {
+            return false
+          }
+
+          return value.replace(/\D/g, '').length === 11
+        },
+        'Введите корректный номер телефона',
+      ),
+    },
+  },
+  {
+    autoDirty: false,
+  },
+)
+async function sendOtpCode() {
+  const { valid } = await r$.$validate()
+
+  if (!valid) {
+    return
+  }
+
+  requestOtp(phone.value)
+}
 </script>
 
 <template>
@@ -35,18 +66,21 @@ const { mutate: requestOtp } = useMutation({
     >
       Введите номер телефона для входа в свой профиль
     </VTypography>
-    <div class="auth-page__phone">
-      <VTextField
-        v-model="phone"
-        v-maskito="phoneMaskOptions"
-        placeholder="+7"
-      />
-    </div>
-    <div class="auth-page__submit">
-      <VButton @click="requestOtp(phone)">
-        Продолжить
-      </VButton>
-    </div>
+    <form @submit.prevent="sendOtpCode">
+      <div class="auth-page__phone">
+        <VTextField
+          v-model="phone"
+          v-maskito="phoneMaskOptions"
+          placeholder="+7"
+          :message="r$.phone.$errors[0]"
+        />
+      </div>
+      <div class="auth-page__submit">
+        <VButton>
+          Продолжить
+        </VButton>
+      </div>
+    </form>
   </div>
 </template>
 
