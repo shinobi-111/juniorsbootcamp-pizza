@@ -4,7 +4,7 @@ import {VButton, VTextField, VTypography} from "@/shared/ui";
 import { maskito as vMaskito } from '@maskito/vue'
 import {authApi} from "@/pages/auth/api";
 import {computed, onMounted, onUnmounted, ref} from "vue";
-import {useMutation} from "@pinia/colada";
+import {useMutation, useQueryCache} from "@pinia/colada";
 import {onlyDigitsMaskOptions} from "@/shared/lib/mask";
 import {useRouter} from "vue-router";
 import {RouteNamesEnum} from "@/shared/config";
@@ -26,9 +26,12 @@ const seconds = ref(10)
 
 let timerId: ReturnType<typeof setInterval> | null = null;
 
+const queryCache = useQueryCache()
+
 const { mutate: signIn } = useMutation({
   mutation: authApi.signIn,
-  onSuccess() {
+  onSuccess(data) {
+    queryCache.setQueryData(['current-user'], data.user)
     router.replace({name: RouteNamesEnum.Home})
   },
 })

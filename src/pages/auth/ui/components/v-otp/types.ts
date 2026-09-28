@@ -4,3 +4,4 @@ export type ButtonProperty =  {
   variant: Variant
   text: string
 }
+

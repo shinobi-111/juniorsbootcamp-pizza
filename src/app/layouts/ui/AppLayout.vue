@@ -9,10 +9,7 @@ const layout = computed(() => route?.meta?.layoutComponent)
 
 <template>
   <component :is="layout">
-    <template #actions>
-      <button>Action</button>
-    </template>
-    <slot></slot>
+    <slot />
   </component>
 </template>
 

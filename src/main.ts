@@ -1,13 +1,14 @@
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+
 import App from './app/App.vue'
 import {router, store} from "@/app/providers";
 import '@fontsource/nunito';
 import {PiniaColada} from "@pinia/colada";
+import { RegleVuePlugin } from '@regle/core';
 
 const app = createApp(App)
 
-app.use(createPinia())
+
 
 app
   .use(store)
@@ -24,4 +25,5 @@ app
       // add Pinia Colada plugins here
     ],
   })
+  .use(RegleVuePlugin)
   .mount('#app')
