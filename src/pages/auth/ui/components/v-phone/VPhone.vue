@@ -77,7 +77,7 @@ async function sendOtpCode() {
         />
       </div>
       <div class="auth-page__submit">
-        <VButton>
+        <VButton type="submit">
           Продолжить
         </VButton>
       </div>
