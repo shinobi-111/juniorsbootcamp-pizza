@@ -1,4 +1,12 @@
-import {BASE_URL, OTP, SIGN_IN, type SignInResponse, type User} from "../api";
+import {
+  BASE_URL,
+  OTP,
+  SIGN_IN,
+  SIGN_OUT,
+  type SignInResponse,
+  type SignOutResponse,
+  type User
+} from "../api";
 
 
 export async function getOtpCode(phone: string) {
@@ -41,4 +49,20 @@ export async function signIn({phone, otpCode}: {phone: string; otpCode: string})
   }
   const data: SignInResponse = await response.json()
   return data.user
+}
+
+export async function signOut() {
+  const response = await fetch(`${BASE_URL}/${SIGN_OUT}`, {
+    method: 'POST',
+    headers: {
+      'x-application': 'web',
+    },
+    credentials: 'include',
+  })
+
+  if (!response.ok) {
+    throw new Error('Не удалось отправить OTP')
+  }
+  const data: SignOutResponse = await response.json()
+  return data.success
 }

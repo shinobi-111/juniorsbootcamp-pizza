@@ -11,3 +11,7 @@ export type SignInResponse = {
   success: boolean
   user: User
 }
+
+export type SignOutResponse = {
+  success: boolean
+}
